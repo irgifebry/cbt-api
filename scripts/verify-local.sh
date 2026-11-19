@@ -11,6 +11,7 @@ run_php() {
     docker run --rm \
         -e DB_CONNECTION=sqlite \
         -e DB_DATABASE=:memory: \
+        -e DB_URL= \
         -v "$ROOT_DIR:/app" \
         -w /app \
         "$IMAGE_NAME" \
@@ -24,7 +25,14 @@ printf '\n==> Run full test suite\n'
 run_php artisan test
 
 printf '\n==> Verify registered route inventory\n'
-ROUTES_JSON="$(docker run --rm -v "$ROOT_DIR:/app" -w /app "$IMAGE_NAME" php artisan route:list --json)"
+ROUTES_JSON="$(docker run --rm \
+    -e DB_CONNECTION=sqlite \
+    -e DB_DATABASE=:memory: \
+    -e DB_URL= \
+    -v "$ROOT_DIR:/app" \
+    -w /app \
+    "$IMAGE_NAME" \
+    php artisan route:list --json)"
 ROUTES_JSON="$ROUTES_JSON" python3 - <<'PY'
 import json
 import os
