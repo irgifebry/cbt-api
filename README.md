@@ -5,9 +5,15 @@ Standalone Laravel 13 API foundation for the CBT service. This repository is iso
 ## Requirements
 
 - Docker Desktop installed and active.
-- Docker image `ucademy-php83-composer` (PHP 8.3.36, Composer 2.11.2, and zip).
+- Docker image `ucademy-php83-composer` (PHP 8.3 CLI, Composer 2, and zip extension).
 
-Use the already-provisioned `ucademy-php83-composer` image. All PHP, Composer, Artisan, and test commands below run inside that image; no host PHP or Composer installation is needed. Run commands from this repository root.
+To build the image locally from the provided `Dockerfile`:
+
+```sh
+docker build -t ucademy-php83-composer .
+```
+
+All PHP, Composer, Artisan, and test commands below run inside that image; no host PHP or Composer installation is needed. Run commands from this repository root.
 
 ## Local setup
 
