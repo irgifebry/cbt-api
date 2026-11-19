@@ -40,10 +40,30 @@ docker run --rm -p 8000:8000 -v "$PWD:/app" -w /app ucademy-php83-composer php a
 
 Keep Docker Desktop active while running any command or the local server. The framework health check is available at `/up`.
 
+## Endpoints
+
+### Health check
+
+- **Route:** `GET /api/health`
+- **Purpose:** Availability check for the standalone CBT API service.
+- **Response:** HTTP 200 OK
+  ```json
+  {"success":true,"service":"cbt-api"}
+  ```
+- **Security & Privacy:** Availability check only; does not expose database credentials, environment variables, debug data, or user/course information.
+
 ## Tests
+
+Run the full test suite:
 
 ```sh
 docker run --rm -v "$PWD:/app" -w /app ucademy-php83-composer php artisan test
+```
+
+Run a specific test:
+
+```sh
+docker run --rm -v "$PWD:/app" -w /app ucademy-php83-composer php artisan test --filter=HealthEndpointTest
 ```
 
 ## Current scope
