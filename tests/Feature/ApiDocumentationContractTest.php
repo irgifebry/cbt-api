@@ -20,6 +20,7 @@ class ApiDocumentationContractTest extends TestCase
         );
 
         $this->assertSame('3.1.0', $openApi['openapi']);
+        $this->assertSame(['/api/health'], array_keys($openApi['paths']));
         $this->assertSame(['get'], array_keys($openApi['paths']['/api/health']));
         $this->assertSame(
             ['success' => true, 'service' => 'cbt-api'],
@@ -32,6 +33,8 @@ class ApiDocumentationContractTest extends TestCase
             'https://schema.getpostman.com/json/collection/v2.1.0/collection.json',
             $postman['info']['schema'],
         );
+        $this->assertCount(1, $postman['item']);
+        $this->assertSame('Health check', $postman['item'][0]['name']);
         $this->assertSame('http://localhost:8000', $postman['variable'][0]['value']);
         $this->assertSame('GET', $postman['item'][0]['request']['method']);
         $this->assertSame('{{baseUrl}}/api/health', $postman['item'][0]['request']['url']['raw']);
