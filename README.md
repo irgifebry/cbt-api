@@ -65,7 +65,15 @@ The collection has a `baseUrl` variable set to `http://localhost:8000`. Change i
 
 ## Tests
 
-Run the full test suite:
+Run the local verification script from any working directory:
+
+```sh
+./scripts/verify-local.sh
+```
+
+The script builds the Docker image, runs migrations against an isolated in-memory SQLite database, runs the full test suite, and confirms the only registered routes are `/api/health` and `/up`. It does not modify the local development database at `database/database.sqlite`.
+
+Run tests directly from the repository root:
 
 ```sh
 docker run --rm -v "$PWD:/app" -w /app ucademy-php83-composer php artisan test
