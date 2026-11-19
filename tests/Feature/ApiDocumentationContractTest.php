@@ -31,6 +31,7 @@ class ApiDocumentationContractTest extends TestCase
         $this->assertSame('object', $schema['type']);
         $this->assertFalse($schema['additionalProperties']);
         $this->assertSame(['success', 'service'], $schema['required']);
+        $this->assertEqualsCanonicalizing(['success', 'service'], array_keys($schema['properties']));
         $this->assertSame(
             ['type' => 'boolean', 'const' => true],
             $schema['properties']['success'],
@@ -45,6 +46,7 @@ class ApiDocumentationContractTest extends TestCase
         );
         $this->assertCount(1, $postman['item']);
         $this->assertSame('Health check', $postman['item'][0]['name']);
+        $this->assertSame('baseUrl', $postman['variable'][0]['key']);
         $this->assertSame('http://localhost:8000', $postman['variable'][0]['value']);
         $this->assertSame('GET', $postman['item'][0]['request']['method']);
         $this->assertSame('{{baseUrl}}/api/health', $postman['item'][0]['request']['url']['raw']);
