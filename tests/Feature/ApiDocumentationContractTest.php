@@ -45,7 +45,7 @@ class ApiDocumentationContractTest extends TestCase
             $postman['info']['schema'],
         );
         $this->assertCount(1, $postman['item']);
-        $this->assertSame('Health check', $postman['item'][0]['name']);
+        $this->assertSame('Pemeriksaan kesehatan', $postman['item'][0]['name']);
         $this->assertSame('baseUrl', $postman['variable'][0]['key']);
         $this->assertSame('http://localhost:8000', $postman['variable'][0]['value']);
         $this->assertSame('GET', $postman['item'][0]['request']['method']);

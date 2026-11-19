@@ -1,25 +1,25 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "U-Cademy CBT API",
+    "title": "API CBT U-Cademy",
     "version": "0.1.0",
-    "description": "API-only foundation for the standalone U-Cademy CBT service. The only business-independent endpoint currently available is the health check."
+    "description": "Fondasi API saja untuk layanan CBT U-Cademy mandiri. Satu-satunya endpoint yang tersedia saat ini dan tidak bergantung pada proses bisnis adalah pemeriksaan kesehatan."
   },
   "servers": [
     {
       "url": "http://localhost:8000",
-      "description": "Local Docker development server"
+      "description": "Server pengembangan Docker lokal"
     }
   ],
   "paths": {
     "/api/health": {
       "get": {
         "operationId": "getCbtApiHealth",
-        "summary": "Check API availability",
-        "description": "Returns a minimal health response without environment or user data.",
+        "summary": "Periksa ketersediaan API",
+        "description": "Mengembalikan respons kesehatan minimal tanpa data lingkungan atau pengguna.",
         "responses": {
           "200": {
-            "description": "The API process is available.",
+            "description": "Proses API tersedia.",
             "content": {
               "application/json": {
                 "schema": {
