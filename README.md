@@ -32,11 +32,13 @@ The default database connection is SQLite and its path is `database/database.sql
 
 ## Run locally
 
+The application exposes no user-facing HTML pages. Start the Laravel server when testing API routes:
+
 ```sh
 docker run --rm -p 8000:8000 -v "$PWD:/app" -w /app ucademy-php83-composer php artisan serve --host=0.0.0.0
 ```
 
-Open <http://localhost:8000>. Keep Docker Desktop active while running any command or the local server.
+Keep Docker Desktop active while running any command or the local server. The framework health check is available at `/up`.
 
 ## Tests
 
