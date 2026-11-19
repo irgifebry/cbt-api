@@ -1,37 +1,51 @@
-openapi: 3.1.0
-info:
-  title: U-Cademy CBT API
-  version: 0.1.0
-  description: >-
-    API-only foundation for the standalone U-Cademy CBT service. The only
-    business-independent endpoint currently available is the health check.
-servers:
-  - url: http://localhost:8000
-    description: Local Docker development server
-paths:
-  /api/health:
-    get:
-      operationId: getCbtApiHealth
-      summary: Check API availability
-      description: Returns a minimal health response without environment or user data.
-      responses:
-        '200':
-          description: The API process is available.
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: false
-                required:
-                  - success
-                  - service
-                properties:
-                  success:
-                    type: boolean
-                    const: true
-                  service:
-                    type: string
-                    const: cbt-api
-              example:
-                success: true
-                service: cbt-api
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "U-Cademy CBT API",
+    "version": "0.1.0",
+    "description": "API-only foundation for the standalone U-Cademy CBT service. The only business-independent endpoint currently available is the health check."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "Local Docker development server"
+    }
+  ],
+  "paths": {
+    "/api/health": {
+      "get": {
+        "operationId": "getCbtApiHealth",
+        "summary": "Check API availability",
+        "description": "Returns a minimal health response without environment or user data.",
+        "responses": {
+          "200": {
+            "description": "The API process is available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["success", "service"],
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "const": true
+                    },
+                    "service": {
+                      "type": "string",
+                      "const": "cbt-api"
+                    }
+                  }
+                },
+                "example": {
+                  "success": true,
+                  "service": "cbt-api"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
