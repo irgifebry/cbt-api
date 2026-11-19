@@ -26,8 +26,18 @@ class ApiDocumentationContractTest extends TestCase
             ['success' => true, 'service' => 'cbt-api'],
             $openApi['paths']['/api/health']['get']['responses']['200']['content']['application/json']['example'],
         );
-        $this->assertFalse(
-            $openApi['paths']['/api/health']['get']['responses']['200']['content']['application/json']['schema']['additionalProperties'],
+        $schema = $openApi['paths']['/api/health']['get']['responses']['200']['content']['application/json']['schema'];
+
+        $this->assertSame('object', $schema['type']);
+        $this->assertFalse($schema['additionalProperties']);
+        $this->assertSame(['success', 'service'], $schema['required']);
+        $this->assertSame(
+            ['type' => 'boolean', 'const' => true],
+            $schema['properties']['success'],
+        );
+        $this->assertSame(
+            ['type' => 'string', 'const' => 'cbt-api'],
+            $schema['properties']['service'],
         );
         $this->assertSame(
             'https://schema.getpostman.com/json/collection/v2.1.0/collection.json',
