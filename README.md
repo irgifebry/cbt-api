@@ -46,7 +46,12 @@ docker run --rm -p 8000:8000 -v "$PWD:/app" -w /app ucademy-php83-composer php a
 
 Keep Docker Desktop active while running any command or the local server. The framework health check is available at `/up`.
 
-## Endpoints
+## API documentation
+
+- [OpenAPI specification](docs/openapi.yaml) — source contract for the endpoints currently implemented.
+- [Postman collection](docs/postman/CBT-API.postman_collection.json) — import this file into Postman to send the documented request.
+
+The collection has a `baseUrl` variable set to `http://localhost:8000`. Change it in Postman if the local server uses a different address.
 
 ### Health check
 
