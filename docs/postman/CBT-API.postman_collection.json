@@ -1,0 +1,40 @@
+{
+  "info": {
+    "name": "U-Cademy CBT API",
+    "description": "Requests for the standalone CBT API foundation. Currently includes only the health check endpoint.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health check",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "health"
+          ]
+        },
+        "description": "Returns HTTP 200 and {\"success\":true,\"service\":\"cbt-api\"}."
+      },
+      "response": []
+    }
+  ]
+}

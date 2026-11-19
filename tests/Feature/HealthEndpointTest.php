@@ -16,4 +16,15 @@ class HealthEndpointTest extends TestCase
                 'service' => 'cbt-api',
             ]);
     }
+
+    public function test_no_web_or_storage_file_routes_are_exposed(): void
+    {
+        $this->get('/')->assertNotFound();
+
+        $routes = app('router')->getRoutes();
+
+        foreach ($routes as $route) {
+            $this->assertNotSame('storage/{path}', $route->uri());
+        }
+    }
 }
