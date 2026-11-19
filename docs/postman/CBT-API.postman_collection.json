@@ -1,7 +1,7 @@
 {
   "info": {
-    "name": "U-Cademy CBT API",
-    "description": "Requests for the standalone CBT API foundation. Currently includes only the health check endpoint.",
+    "name": "API CBT U-Cademy",
+    "description": "Kumpulan permintaan untuk fondasi API CBT mandiri. Saat ini hanya mencakup endpoint pemeriksaan kesehatan.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -13,7 +13,7 @@
   ],
   "item": [
     {
-      "name": "Health check",
+      "name": "Pemeriksaan kesehatan",
       "request": {
         "method": "GET",
         "header": [
@@ -32,7 +32,7 @@
             "health"
           ]
         },
-        "description": "Returns HTTP 200 and {\"success\":true,\"service\":\"cbt-api\"}."
+        "description": "Mengembalikan HTTP 200 dan {\"success\":true,\"service\":\"cbt-api\"}."
       },
       "response": []
     }

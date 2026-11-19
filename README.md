@@ -1,19 +1,19 @@
 # CBT API
 
-Standalone Laravel 13 API foundation for the CBT service. This repository is isolated from the LMS and uses a local SQLite database by default.
+Fondasi API Laravel 13 mandiri untuk layanan CBT. Repositori ini terpisah dari LMS dan secara default menggunakan basis data SQLite lokal.
 
 ## Requirements
 
-- Docker Desktop installed and active.
-- Docker image `ucademy-php83-composer` (PHP 8.3 CLI, Composer 2, and zip extension).
+- Docker Desktop telah terpasang dan aktif.
+- Image Docker `ucademy-php83-composer` (PHP 8.3 CLI, Composer 2, dan ekstensi zip).
 
-To build the image locally from the provided `Dockerfile`:
+Untuk membangun image secara lokal dari `Dockerfile` yang disediakan:
 
 ```sh
 docker build -t ucademy-php83-composer .
 ```
 
-All PHP, Composer, Artisan, and test commands below run inside that image; no host PHP or Composer installation is needed. Run commands from this repository root.
+Semua perintah PHP, Composer, Artisan, dan pengujian di bawah dijalankan di dalam image tersebut; PHP atau Composer tidak perlu dipasang di host. Jalankan perintah dari direktori utama repositori ini.
 
 ## Local setup
 
@@ -24,62 +24,62 @@ docker run --rm -v "$PWD:/app" -w /app ucademy-php83-composer composer install
 docker run --rm -v "$PWD:/app" -w /app ucademy-php83-composer php artisan key:generate
 ```
 
-The `.env` file and SQLite database are local runtime files and are ignored by Git.
+File `.env` dan basis data SQLite adalah berkas lokal untuk runtime dan diabaikan oleh Git.
 
 ## Migrations
 
-Apply pending migrations to the local SQLite database:
+Terapkan migrasi yang tertunda ke basis data SQLite lokal:
 
 ```sh
 docker run --rm -v "$PWD:/app" -w /app ucademy-php83-composer php artisan migrate
 ```
 
-The default database connection is SQLite and its path is `database/database.sqlite`. To change local database settings, edit `.env`; do not add LMS database credentials to this service.
+Koneksi basis data bawaan adalah SQLite dengan lokasi `database/database.sqlite`. Untuk mengubah pengaturan basis data lokal, edit `.env`; jangan tambahkan kredensial basis data LMS ke layanan ini.
 
 ## Run locally
 
-The application exposes no user-facing HTML pages. Start the Laravel server when testing API routes:
+Aplikasi ini tidak menyediakan halaman HTML yang ditujukan kepada pengguna. Jalankan server Laravel saat menguji rute API:
 
 ```sh
 docker run --rm -p 8000:8000 -v "$PWD:/app" -w /app ucademy-php83-composer php artisan serve --host=0.0.0.0
 ```
 
-Keep Docker Desktop active while running any command or the local server. The framework health check is available at `/up`.
+Pastikan Docker Desktop tetap aktif saat menjalankan perintah apa pun atau server lokal. Pemeriksaan kesehatan framework tersedia di `/up`.
 
 ## API documentation
 
-- [OpenAPI specification](docs/openapi.yaml) — source contract for the endpoints currently implemented.
-- [Postman collection](docs/postman/CBT-API.postman_collection.json) — import this file into Postman to send the documented request.
+- [Spesifikasi OpenAPI](docs/openapi.yaml) — kontrak sumber untuk endpoint yang saat ini telah diimplementasikan.
+- [Koleksi Postman](docs/postman/CBT-API.postman_collection.json) — impor berkas ini ke Postman untuk mengirim permintaan yang didokumentasikan.
 
-The collection has a `baseUrl` variable set to `http://localhost:8000`. Change it in Postman if the local server uses a different address.
+Koleksi ini memiliki variabel `baseUrl` yang diatur ke `http://localhost:8000`. Ubah nilainya di Postman jika server lokal menggunakan alamat lain.
 
 ### Health check
 
 - **Route:** `GET /api/health`
-- **Purpose:** Availability check for the standalone CBT API service.
+- **Tujuan:** Pemeriksaan ketersediaan layanan API CBT mandiri.
 - **Response:** HTTP 200 OK
   ```json
   {"success":true,"service":"cbt-api"}
   ```
-- **Security & Privacy:** Availability check only; does not expose database credentials, environment variables, debug data, or user/course information.
+- **Keamanan & Privasi:** Hanya memeriksa ketersediaan; tidak mengekspos kredensial basis data, variabel lingkungan, data debug, atau informasi pengguna/kursus.
 
 ## Tests
 
-Run the local verification script from any working directory:
+Jalankan skrip verifikasi lokal dari direktori kerja mana pun:
 
 ```sh
 ./scripts/verify-local.sh
 ```
 
-The script builds the Docker image, runs migrations against an isolated in-memory SQLite database, runs the full test suite, and confirms the only registered routes are `/api/health` and `/up`. It does not modify the local development database at `database/database.sqlite`.
+Skrip ini membangun image Docker, menjalankan migrasi pada basis data SQLite dalam memori yang terisolasi, menjalankan seluruh rangkaian pengujian, dan memastikan bahwa satu-satunya rute terdaftar adalah `/api/health` dan `/up`. Skrip ini tidak mengubah basis data pengembangan lokal di `database/database.sqlite`.
 
-Run tests directly from the repository root:
+Jalankan pengujian langsung dari direktori utama repositori:
 
 ```sh
 docker run --rm -v "$PWD:/app" -w /app ucademy-php83-composer php artisan test
 ```
 
-Run a specific test:
+Jalankan pengujian tertentu:
 
 ```sh
 docker run --rm -v "$PWD:/app" -w /app ucademy-php83-composer php artisan test --filter=HealthEndpointTest
@@ -87,4 +87,4 @@ docker run --rm -v "$PWD:/app" -w /app ucademy-php83-composer php artisan test -
 
 ## Current scope
 
-This is only the standalone API foundation. There is no login/authentication and no CBT business API endpoint yet. It is not production-ready.
+Ini hanya fondasi API mandiri. Belum tersedia login/autentikasi maupun endpoint API untuk kebutuhan bisnis CBT. Layanan ini belum siap digunakan di lingkungan produksi.
